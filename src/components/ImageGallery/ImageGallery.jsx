@@ -9,12 +9,13 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const API_KEY = '18976162-4407e31cd80a0810b100a4c9f';
 
 
-function ImageGallery ({searchRequest}) {
+function ImageGallery ({searchRequest, getLargeImage}) {
 
     const [pictures, setPictures] = useState([]);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [status, setStatus] = useState('idle');
+    const [largeImageurl, setLargeImageurl] = useState('');
 
     useEffect(() => {
         if (searchRequest === '') {
@@ -37,12 +38,21 @@ function ImageGallery ({searchRequest}) {
     }
         };
         loadPictures();
+      
     }, [page, searchRequest]);
 
     useEffect(() => {
         setPage(1);
         setPictures('');
-    }, [searchRequest])
+    }, [searchRequest]);
+
+
+    const handleClick = data => {
+        setLargeImageurl(data);
+        getLargeImage(largeImageurl);
+    }
+
+    
 
     
         if (status === 'idle') {
@@ -72,7 +82,7 @@ function ImageGallery ({searchRequest}) {
                 <>
                     {pictures.length === 0
                         ? <h2 className="ImageGallery__title">No results were found for your search</h2>
-                        : <ImageGalleryItem pictures={pictures} />}
+                        : <ImageGalleryItem pictures={pictures} onClick={handleClick}/>}
                     { pictures.length > 1 && <Button onClick={() => setPage(page => page + 1)} />}
 
                 </>

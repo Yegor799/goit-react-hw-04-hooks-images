@@ -21,6 +21,7 @@ function App () {
   //   window.addEventListener('click', this.handleClick);
   // }
 
+  
    const handleSubmit = searchRequest => {
     setSearchRequest(searchRequest);
   }
@@ -34,14 +35,12 @@ function App () {
   //   }
   // };
 
-  // handleClick = e => {
-  //   if (e.target.nodeName !== 'IMG') {
-  //     return;
-  //   }
+  const handleClick = data => {    
+    toggleModal();
+    setLargeImage(data);
+  }
 
-  //   this.toggleModal();
-  //   this.setState({ largeImage: e.target.getAttribute('data-source') })
-  // }
+  
 
 
   
@@ -51,8 +50,8 @@ function App () {
       <div className="App">
         <ToastContainer autoClose={3000} />
         <SearchBar onSubmit={handleSubmit} />
-        <ImageGallery searchRequest={searchRequest} />
-        {/* {showModal && <Modal largeImage={largeImage} onClose={toggleModal} />} */}
+        <ImageGallery searchRequest={searchRequest} getLargeImage={handleClick} />
+        {showModal && <Modal largeImage={largeImage} onClose={toggleModal} />}
 
       </div>
     )
