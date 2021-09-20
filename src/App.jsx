@@ -72,7 +72,6 @@ function App () {
                     width={100}
                     timeout={3000} />}
         {error && <h2>{error}</h2>}
-        {pictures.length === 0 && searchRequest.length > 0 && <h2 style={{textAlign: "center"}}>No results were found for your search</h2>}
         {pictures.length > 0 && <ImageGallery pictures={pictures} getLargeImage={handleClick} />}
         {pictures.length > 1 && <Button onClick={() => setPage(page => page + 1)} />} 
         {showModal && <Modal largeImage={largeImage} onClose={toggleModal} />}
