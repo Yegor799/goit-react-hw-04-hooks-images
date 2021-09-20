@@ -2,22 +2,17 @@ import React from 'react';
 import './ImageGalleryItem.css';
 
 
-function ImageGalleryItem({ pictures, onClick }) {
+function ImageGalleryItem({ webformatURL, largeImageURL, getLargeImage, tag }) {
+    
     const handleClick = e => {
-        onClick(e.target.getAttribute('data-source'));
-    }
-    return (
-        <ul className="ImageGallery">
-            {pictures.map((picture, idx) => {
-                return (
-                    < li key={idx} className="ImageGalleryItem" >
-                        <img src={picture.webformatURL} data-source={picture.largeImageURL} alt={picture.tag} className="ImageGalleryItem-image" onClick={handleClick} />
-                    </li >
-                )
-            })}
-        </ul>
-    )
+       getLargeImage(e.target.getAttribute(["data-source"]))
+   }
 
+    return (
+        < li className="ImageGalleryItem" >
+            <img src={webformatURL} data-source={largeImageURL} alt={tag} className="ImageGalleryItem-image" onClick={handleClick}  />
+        </li >
+    )      
 }
 
 export default ImageGalleryItem;
